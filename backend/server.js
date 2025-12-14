@@ -13,10 +13,35 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 // CORS configuration - allow all origins in development, specific in production
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+  ? [
+      process.env.FRONTEND_URL,
+      process.env.FRONTEND_URL?.replace(/\/$/, ''), // Remove trailing slash
+      process.env.FRONTEND_URL?.replace(/\/$/, '') + '/', // Add trailing slash
+    ].filter(Boolean)
+  : true; // Allow all origins in development
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? (process.env.FRONTEND_URL || 'http://localhost:8080')
-    : true, // Allow all origins in development
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins === true) {
+      return callback(null, true);
+    }
+    
+    // Normalize origin by removing trailing slash for comparison
+    const normalizedOrigin = origin.replace(/\/$/, '');
+    const normalizedAllowed = Array.isArray(allowedOrigins) 
+      ? allowedOrigins.map(url => url?.replace(/\/$/, ''))
+      : [];
+    
+    if (normalizedAllowed.includes(normalizedOrigin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
