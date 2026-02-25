@@ -178,31 +178,6 @@ const ProductsPage = () => {
                         {product.description}
                       </p>
 
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div>
-                          <p className="text-sm font-semibold text-spice-gold mb-1">Origin</p>
-                          <p className="text-foreground">{product.origin}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-spice-gold mb-1">Uses</p>
-                          <p className="text-foreground">{product.uses}</p>
-                        </div>
-                      </div>
-
-                      <div className="mb-6">
-                        <p className="text-sm font-semibold text-spice-gold mb-2">Available Packaging</p>
-                        <div className="flex flex-wrap gap-2">
-                          {product.sizes.map((size) => (
-                            <span
-                              key={size}
-                              className="px-4 py-2 bg-secondary text-foreground text-sm rounded-full border border-border"
-                            >
-                              {size}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
                       <Button variant="hero" asChild>
                         <Link to="/contact">
                           Request Quote
