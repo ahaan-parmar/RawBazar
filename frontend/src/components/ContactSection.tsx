@@ -95,6 +95,7 @@ const ContactSection = () => {
                 <div>
                   <h4 className="font-semibold text-foreground mb-1">Email Us</h4>
                   <p className="text-muted-foreground">rawbazarofficial@gmail.com</p>
+                  <p className="text-muted-foreground">GST: 27AAHCJ0180C1ZX</p>
                 </div>
               </div>
             </div>

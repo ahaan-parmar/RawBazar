@@ -7,7 +7,6 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import Products from "./pages/Products";
 import About from "./pages/About";
-import Quality from "./pages/Quality";
 import Global from "./pages/Global";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -25,7 +24,6 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/products" element={<Products />} />
             <Route path="/about" element={<About />} />
-            <Route path="/quality" element={<Quality />} />
             <Route path="/global" element={<Global />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
