@@ -29,15 +29,6 @@ const values = [
   },
 ];
 
-const milestones = [
-  { year: "1998", event: "RawBazar founded in Mumbai" },
-  { year: "2005", event: "First international export to UAE" },
-  { year: "2010", event: "Expanded to 20+ countries" },
-  { year: "2015", event: "ISO 22000 certification achieved" },
-  { year: "2020", event: "Launched organic product line" },
-  { year: "2024", event: "Serving 50+ countries globally" },
-];
-
 const AboutPage = () => {
   return (
     <>
@@ -157,40 +148,6 @@ const AboutPage = () => {
                     </p>
                   </div>
                 ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Timeline */}
-          <section className="py-20 bg-background">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="text-center mb-16">
-                <span className="inline-block text-spice-gold text-sm font-body tracking-widest uppercase mb-4">
-                  Our Journey
-                </span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-                  Key Milestones
-                </h2>
-              </div>
-
-              <div className="max-w-3xl mx-auto">
-                <div className="relative">
-                  <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-spice-gold/30" />
-                  <div className="space-y-8">
-                    {milestones.map((milestone) => (
-                      <div key={milestone.year} className="flex gap-6">
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-spice-gold to-spice-saffron flex items-center justify-center flex-shrink-0 shadow-warm z-10">
-                          <span className="font-display text-sm font-bold text-spice-brown">
-                            {milestone.year}
-                          </span>
-                        </div>
-                        <div className="bg-card rounded-xl p-6 shadow-card border border-border flex-1">
-                          <p className="text-foreground font-medium">{milestone.event}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
           </section>
