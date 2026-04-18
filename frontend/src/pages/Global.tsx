@@ -114,29 +114,6 @@ const GlobalPage = () => {
             </div>
           </section>
 
-          {/* Export Stats */}
-          <section className="py-20 bg-secondary">
-            <div className="container mx-auto px-4 md:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div className="text-center">
-                  <p className="font-display text-4xl md:text-5xl font-bold text-spice-gold mb-2">50+</p>
-                  <p className="text-muted-foreground">Countries Served</p>
-                </div>
-                <div className="text-center">
-                  <p className="font-display text-4xl md:text-5xl font-bold text-spice-gold mb-2">500+</p>
-                  <p className="text-muted-foreground">Active Clients</p>
-                </div>
-                <div className="text-center">
-                  <p className="font-display text-4xl md:text-5xl font-bold text-spice-gold mb-2">1000+</p>
-                  <p className="text-muted-foreground">Containers/Year</p>
-                </div>
-                <div className="text-center">
-                  <p className="font-display text-4xl md:text-5xl font-bold text-spice-gold mb-2">98%</p>
-                  <p className="text-muted-foreground">On-time Delivery</p>
-                </div>
-              </div>
-            </div>
-          </section>
 
           {/* CTA */}
           <section className="py-20 bg-spice-brown">

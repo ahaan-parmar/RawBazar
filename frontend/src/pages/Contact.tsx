@@ -52,7 +52,7 @@ const ContactPage = () => {
               </div>
               <div className="rounded-2xl overflow-hidden shadow-deep h-96 bg-muted">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.123456789!2d73.7890123456789!3d18.5123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c1234567890%3A0x1234567890abcdef!2sKothrud%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d500!2d73.820872!3d18.4871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDI5JzEzLjYiTiA3M8KwNDknMTUuMSJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -62,6 +62,14 @@ const ContactPage = () => {
                   title="RawBazar Office Location"
                 />
               </div>
+              <a
+                href="https://www.google.com/maps?q=18.487100,73.820872"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-3 text-sm text-spice-gold hover:underline"
+              >
+                Open in Maps ↗
+              </a>
             </div>
           </section>
         </main>

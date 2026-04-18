@@ -1,4 +1,4 @@
-import { Sparkles, Leaf, Flame } from "lucide-react";
+import { Sparkles, Leaf, Flame, UtensilsCrossed } from "lucide-react";
 
 const catalogData = {
   powders: [
@@ -21,6 +21,13 @@ const catalogData = {
     "Cardamom powder",
     "Dalchini powder",
     "Nutmeg powder",
+  ],
+  masalas: [
+    "Haldi powder",
+    "Chilly powder",
+    "Dhaniya powder",
+    "Goda masala",
+    "Kanda lasoon masala",
   ],
   vegetablePowders: [
     "Dry mango powder",
@@ -56,7 +63,33 @@ const ProductCatalog = () => {
         </div>
 
         {/* Catalog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {/* Masalas */}
+          <div className="relative bg-gradient-to-br from-orange-500/5 via-card to-card rounded-2xl p-6 shadow-card hover:shadow-deep transition-all duration-300 border-2 border-orange-500/20 hover:border-orange-500/40 group overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-orange-500/10 transition-colors" />
+            <div className="relative">
+              <div className="flex items-center gap-3 mb-5 pb-4 border-b-2 border-orange-500/30">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-400 flex items-center justify-center shadow-warm">
+                  <UtensilsCrossed className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-display text-2xl font-bold text-foreground">
+                  Masalas
+                </h3>
+              </div>
+              <ul className="space-y-2.5">
+                {catalogData.masalas.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-2.5 text-muted-foreground hover:text-foreground transition-colors group/item"
+                  >
+                    <span className="text-orange-500 mt-1.5 text-lg leading-none">✦</span>
+                    <span className="flex-1 text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           {/* Powders */}
           <div className="relative bg-gradient-to-br from-spice-gold/5 via-card to-card rounded-2xl p-6 shadow-card hover:shadow-deep transition-all duration-300 border-2 border-spice-gold/20 hover:border-spice-gold/40 group overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-spice-gold/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 group-hover:bg-spice-gold/10 transition-colors" />

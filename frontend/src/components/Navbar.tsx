@@ -77,9 +77,14 @@ const Navbar = () => {
                 WhatsApp
               </a>
             </Button>
+            <Button variant="elegant" size="sm" asChild>
+              <a href="tel:+919890661550">
+                <Phone className="w-4 h-4" />
+                Call Us
+              </a>
+            </Button>
             <Button variant="hero" size="sm" asChild>
               <Link to="/contact">
-                <Phone className="w-4 h-4" />
                 Get Quote
               </Link>
             </Button>

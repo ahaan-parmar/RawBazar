@@ -94,7 +94,7 @@ const AboutPage = () => {
                       What Makes Us Different
                     </h3>
                     <p>
-                      We're not just exporters—we're storytellers of India's spice heritage. When you partner with 
+                      We're not just exporters, we're storytellers of India's spice heritage. When you partner with 
                       RawBazar, you're getting more than premium spices. You're getting products that are:
                     </p>
                     <ul className="list-disc list-inside space-y-2 ml-4">
