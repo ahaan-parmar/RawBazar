@@ -13,7 +13,6 @@ const catalogData = {
     "Goat milk powder",
   ],
   spices: [
-    "Turmeric powder",
     "Chilli powder",
     "Cumin [jeera] powder",
     "Coriander powder",

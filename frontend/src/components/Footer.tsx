@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import logo from "@/assets/logo.png";
+import fssaiLogo from "@/assets/fssai.webp";
 
 const Footer = () => {
   return (
@@ -20,6 +21,9 @@ const Footer = () => {
             <p className="text-spice-cream/70 text-sm leading-relaxed">
               Bringing the authentic taste of India to the world. Premium quality spices sourced directly from Indian farms, processed with care, and delivered globally.
             </p>
+            <div>
+              <img src={fssaiLogo} alt="FSSAI Certified" className="h-12 w-auto object-contain opacity-90" />
+            </div>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-spice-gold/10 flex items-center justify-center hover:bg-spice-gold/20 transition-colors">
                 <Facebook className="w-5 h-5 text-spice-gold" />

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Leaf, Award, Globe, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import farmImage from "@/assets/farm.jpg";
+import farmImage from "@/assets/spices.jpg";
 
 const features = [
   {
