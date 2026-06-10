@@ -8,10 +8,26 @@ const ContactPage = () => {
     <>
       <Helmet>
         <title>Contact RawBazar | Export Inquiry & Business Partnership</title>
-        <meta
-          name="description"
-          content="Get in touch with RawBazar for export inquiries, bulk orders, and business partnerships. Quick response within 24 hours. WhatsApp support available."
-        />
+        <meta name="description" content="Get in touch with RawBazar for export inquiries, bulk orders, and business partnerships. Quick response within 24 hours. WhatsApp support available." />
+        <meta name="keywords" content="contact spice exporter, spice export inquiry, bulk spice order India, WhatsApp spice supplier, Indian spice business partnership" />
+        <link rel="canonical" href="https://raw-bazar.vercel.app/contact" />
+        <meta property="og:title" content="Contact RawBazar | Export Inquiry & Business Partnership" />
+        <meta property="og:description" content="Get in touch for export inquiries, bulk orders, and partnerships. Response within 24 hours." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://raw-bazar.vercel.app/contact" />
+        <meta property="og:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta property="og:site_name" content="RawBazar" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact RawBazar | Export Inquiry & Business Partnership" />
+        <meta name="twitter:description" content="Get in touch for export inquiries, bulk orders, and partnerships. Response within 24 hours." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://raw-bazar.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://raw-bazar.vercel.app/contact" }
+          ]
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">

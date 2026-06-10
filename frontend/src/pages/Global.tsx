@@ -44,10 +44,26 @@ const GlobalPage = () => {
     <>
       <Helmet>
         <title>Global Presence | RawBazar Export to 50+ Countries</title>
-        <meta
-          name="description"
-          content="RawBazar exports premium Indian spices to 50+ countries across 6 continents. Reliable logistics, sea & air freight options, and excellent customer support."
-        />
+        <meta name="description" content="RawBazar exports premium Indian spices to 50+ countries across 6 continents. Reliable logistics, sea & air freight options, and excellent customer support." />
+        <meta name="keywords" content="Indian spice export worldwide, spice exporter USA, spice supplier Europe, Middle East spice import, bulk spice shipping, global spice distributor" />
+        <link rel="canonical" href="https://raw-bazar.vercel.app/global" />
+        <meta property="og:title" content="Global Presence | RawBazar Exports to 50+ Countries" />
+        <meta property="og:description" content="RawBazar ships premium Indian spices to 50+ countries across 6 continents with reliable sea and air freight." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://raw-bazar.vercel.app/global" />
+        <meta property="og:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta property="og:site_name" content="RawBazar" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Global Presence | RawBazar Exports to 50+ Countries" />
+        <meta name="twitter:description" content="RawBazar ships premium Indian spices to 50+ countries across 6 continents with reliable sea and air freight." />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://raw-bazar.vercel.app" },
+            { "@type": "ListItem", "position": 2, "name": "Global Presence", "item": "https://raw-bazar.vercel.app/global" }
+          ]
+        })}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
