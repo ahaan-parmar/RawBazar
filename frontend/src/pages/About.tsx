@@ -36,12 +36,12 @@ const AboutPage = () => {
         <title>About RawBazar | Family-Run Spice Export Business from Pune, India</title>
         <meta name="description" content="RawBazar is a family-run spice export business based in Pune, India. We work directly with farmers, ensuring FSSAI certified premium spices with authentic flavors from farm to table." />
         <meta name="keywords" content="about RawBazar, Indian spice company, FSSAI certified spice exporter, Pune spice exporter, family spice business, sustainable spice farming" />
-        <link rel="canonical" href="https://raw-bazar.vercel.app/about" />
+        <link rel="canonical" href="https://rawbazar.com/about" />
         <meta property="og:title" content="About RawBazar | Family-Run Spice Export Business" />
         <meta property="og:description" content="Family-run spice exporter from Pune, India. FSSAI certified, farm-direct sourcing, 50+ countries served." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://raw-bazar.vercel.app/about" />
-        <meta property="og:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta property="og:url" content="https://rawbazar.com/about" />
+        <meta property="og:image" content="https://rawbazar.com/favicon.png" />
         <meta property="og:site_name" content="RawBazar" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="About RawBazar | Family-Run Spice Export Business" />
@@ -50,8 +50,8 @@ const AboutPage = () => {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://raw-bazar.vercel.app" },
-            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://raw-bazar.vercel.app/about" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rawbazar.com" },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://rawbazar.com/about" }
           ]
         })}</script>
       </Helmet>

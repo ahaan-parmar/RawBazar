@@ -34,12 +34,12 @@ const QualityPage = () => {
         <title>Quality & Certifications | RawBazar Export Standards</title>
         <meta name="description" content="RawBazar maintains the highest quality standards with ISO 22000, FSSAI, HACCP, and organic certifications. Learn about our rigorous quality control process." />
         <meta name="keywords" content="spice quality certifications, ISO 22000 spices, FSSAI certified exporter, HACCP spices, food safety standards, certified organic spices India" />
-        <link rel="canonical" href="https://raw-bazar.vercel.app/quality" />
+        <link rel="canonical" href="https://rawbazar.com/quality" />
         <meta property="og:title" content="Quality & Certifications | RawBazar Export Standards" />
         <meta property="og:description" content="ISO 22000, FSSAI, HACCP certified spice exporter. Rigorous lab testing and international food safety compliance." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://raw-bazar.vercel.app/quality" />
-        <meta property="og:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta property="og:url" content="https://rawbazar.com/quality" />
+        <meta property="og:image" content="https://rawbazar.com/favicon.png" />
         <meta property="og:site_name" content="RawBazar" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Quality & Certifications | RawBazar Export Standards" />
@@ -48,8 +48,8 @@ const QualityPage = () => {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://raw-bazar.vercel.app" },
-            { "@type": "ListItem", "position": 2, "name": "Quality", "item": "https://raw-bazar.vercel.app/quality" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rawbazar.com" },
+            { "@type": "ListItem", "position": 2, "name": "Quality", "item": "https://rawbazar.com/quality" }
           ]
         })}</script>
       </Helmet>

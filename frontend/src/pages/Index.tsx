@@ -15,25 +15,25 @@ const Index = () => {
         <title>RawBazar - Premium Indian Spice Exporter | Authentic Spices from Farm to World</title>
         <meta name="description" content="RawBazar is India's trusted premium spice exporter. We offer authentic turmeric, cumin, cardamom, red chili, and more. 25+ years of excellence, 50+ countries served." />
         <meta name="keywords" content="Indian spice exporter, premium spices, turmeric exporter, cumin seeds, cardamom export, wholesale spices, bulk spice supplier, spices from India" />
-        <link rel="canonical" href="https://raw-bazar.vercel.app" />
+        <link rel="canonical" href="https://rawbazar.com" />
         <meta property="og:title" content="RawBazar - Premium Indian Spice Exporter" />
         <meta property="og:description" content="Authentic Indian spices from farm to world. 25+ years of export excellence, 50+ countries served." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://raw-bazar.vercel.app" />
-        <meta property="og:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta property="og:url" content="https://rawbazar.com" />
+        <meta property="og:image" content="https://rawbazar.com/favicon.png" />
         <meta property="og:site_name" content="RawBazar" />
         <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@RawBazar" />
         <meta name="twitter:title" content="RawBazar - Premium Indian Spice Exporter" />
         <meta name="twitter:description" content="Authentic Indian spices from farm to world. 25+ years of export excellence, 50+ countries served." />
-        <meta name="twitter:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta name="twitter:image" content="https://rawbazar.com/favicon.png" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "RawBazar",
-          "url": "https://raw-bazar.vercel.app",
-          "logo": "https://raw-bazar.vercel.app/favicon.png",
+          "url": "https://rawbazar.com",
+          "logo": "https://rawbazar.com/favicon.png",
           "description": "Premium Indian spice exporter based in Pune, India. Supplying authentic turmeric, cumin, cardamom, and more to 50+ countries worldwide.",
           "address": {
             "@type": "PostalAddress",
@@ -53,7 +53,7 @@ const Index = () => {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "RawBazar",
-          "url": "https://raw-bazar.vercel.app"
+          "url": "https://rawbazar.com"
         })}</script>
       </Helmet>
 

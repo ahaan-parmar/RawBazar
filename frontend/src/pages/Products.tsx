@@ -13,12 +13,12 @@ const ProductsPage = () => {
         <title>Premium Indian Spices Collection | RawBazar Export Products</title>
         <meta name="description" content="Explore our premium collection of Indian spices: Turmeric, Red Chili, Cumin, Cardamom, Black Pepper, Cinnamon, Saffron. Available for bulk export worldwide." />
         <meta name="keywords" content="buy Indian spices, turmeric wholesale, cumin export, cardamom supplier, red chili powder, black pepper exporter, bulk spice order, Indian spice catalog" />
-        <link rel="canonical" href="https://raw-bazar.vercel.app/products" />
+        <link rel="canonical" href="https://rawbazar.com/products" />
         <meta property="og:title" content="Premium Indian Spices Collection | RawBazar" />
         <meta property="og:description" content="Explore our premium collection of Indian spices available for bulk export worldwide." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://raw-bazar.vercel.app/products" />
-        <meta property="og:image" content="https://raw-bazar.vercel.app/favicon.png" />
+        <meta property="og:url" content="https://rawbazar.com/products" />
+        <meta property="og:image" content="https://rawbazar.com/favicon.png" />
         <meta property="og:site_name" content="RawBazar" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Premium Indian Spices Collection | RawBazar" />
@@ -27,8 +27,8 @@ const ProductsPage = () => {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://raw-bazar.vercel.app" },
-            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://raw-bazar.vercel.app/products" }
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rawbazar.com" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://rawbazar.com/products" }
           ]
         })}</script>
       </Helmet>
