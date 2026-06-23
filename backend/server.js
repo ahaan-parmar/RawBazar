@@ -11,36 +11,28 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
-// CORS configuration - allow all origins in development, specific in production
-const allowedOrigins = process.env.NODE_ENV === 'production' 
-  ? [
-      process.env.FRONTEND_URL,
-      process.env.FRONTEND_URL?.replace(/\/$/, ''), // Remove trailing slash
-      process.env.FRONTEND_URL?.replace(/\/$/, '') + '/', // Add trailing slash
-    ].filter(Boolean)
-  : true; // Allow all origins in development
+// Build the allowlist: for each FRONTEND_URL, include both apex and www variants.
+const expandOrigins = (url) => {
+  if (!url) return [];
+  try {
+    const u = new URL(url.replace(/\/$/, ''));
+    const apex = u.hostname.replace(/^www\./, '');
+    return [`${u.protocol}//${apex}`, `${u.protocol}//www.${apex}`];
+  } catch {
+    return [];
+  }
+};
+
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? expandOrigins(process.env.FRONTEND_URL)
+  : true;
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    if (allowedOrigins === true) {
-      return callback(null, true);
-    }
-    
-    // Normalize origin by removing trailing slash for comparison
-    const normalizedOrigin = origin.replace(/\/$/, '');
-    const normalizedAllowed = Array.isArray(allowedOrigins) 
-      ? allowedOrigins.map(url => url?.replace(/\/$/, ''))
-      : [];
-    
-    if (normalizedAllowed.includes(normalizedOrigin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    if (allowedOrigins === true) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error(`Not allowed by CORS: ${origin}`));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
