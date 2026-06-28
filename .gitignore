@@ -1,2 +1,5 @@
 lead-scraper/
-frontend/public/RawBazar.pdf
+
+# Large files / private docs
+*.zip
+*.pdf
