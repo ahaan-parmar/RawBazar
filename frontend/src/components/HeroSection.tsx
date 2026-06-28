@@ -1,91 +1,163 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import heroImage from "@/assets/hero-spices.jpg";
 
 const HeroSection = () => {
+  const [catalogueHover, setCatalogueHover] = useState(false);
+  const [waHover, setWaHover] = useState(false);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Premium Indian Spices arranged artistically"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-spice-brown/95 via-spice-brown/80 to-spice-brown/60" />
-        <div className="absolute inset-0 bg-gradient-to-t from-spice-brown via-transparent to-transparent" />
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-20 right-10 w-64 h-64 bg-spice-gold/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 left-10 w-48 h-48 bg-spice-saffron/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 md:px-6 pt-32 pb-20">
-        <div className="max-w-3xl">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-spice-gold/10 border border-spice-gold/30 rounded-full mb-8 animate-fade-up">
-            <span className="w-2 h-2 bg-spice-gold rounded-full animate-pulse" />
-            <span className="text-spice-gold text-sm font-body tracking-wide">
-              Trusted by 500+ Global Importers
+    <section id="top" style={{ position: "relative" }}>
+      <div style={{
+        maxWidth: 1320,
+        margin: "0 auto",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(440px, 1fr))",
+      }}>
+        {/* Left: text */}
+        <div className="rb-rise" style={{
+          padding: "clamp(48px,7vw,104px) clamp(28px,4vw,56px) clamp(44px,5vw,72px) 32px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          minHeight: "clamp(520px,80vh,860px)",
+        }}>
+          {/* Eyebrow */}
+          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 30 }}>
+            <span style={{ width: 36, height: 1, background: "#D69A2E" }} />
+            <span style={{ fontSize: 11.5, letterSpacing: ".32em", textTransform: "uppercase", color: "#D69A2E", fontWeight: 600 }}>
+              Spice exporters · Est. Pune, India
             </span>
           </div>
 
-          {/* Main Heading */}
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-spice-cream leading-tight mb-6 animate-fade-up animation-delay-100">
-            Authentic{" "}
-            <span className="text-gradient-gold">Indian Spices</span>
-            <br />
-            From Farm to World
+          {/* Headline */}
+          <h1 style={{
+            fontFamily: "'Instrument Serif', serif",
+            fontWeight: 500,
+            fontSize: "clamp(46px,6.2vw,102px)",
+            lineHeight: 0.96,
+            letterSpacing: "-.014em",
+            margin: 0,
+            color: "#F0E9DA",
+          }}>
+            India's finest spices,<br />
+            <span style={{ fontStyle: "italic", color: "#D69A2E" }}>delivered to the world.</span>
           </h1>
 
-          {/* Subheading */}
-          <p className="font-body text-lg md:text-xl text-spice-cream/80 leading-relaxed mb-10 max-w-2xl animate-fade-up animation-delay-200">
-            Experience the rich heritage of Indian spices. Premium quality, 
-            direct sourcing from farms across India, and reliable global export 
-            to bring authentic flavors to your table.
+          {/* Sub */}
+          <p style={{
+            maxWidth: "46ch",
+            margin: "30px 0 0",
+            color: "#A2917A",
+            fontSize: "clamp(15px,1.2vw,18px)",
+            lineHeight: 1.62,
+            fontWeight: 400,
+          }}>
+            A family-run export house sourcing single-origin spices straight from Indian farms — milled to order, lab-tested, and shipped to fifty-plus countries under one seal of trust.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-up animation-delay-300">
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/contact">
-                Request Export Quote
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
-            <Button variant="whatsapp" size="xl" asChild>
-              <a href="https://wa.me/919890661550" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-5 h-5" />
-                WhatsApp Us
-              </a>
-            </Button>
+          {/* CTAs */}
+          <div style={{ display: "flex", alignItems: "center", gap: 26, marginTop: 40, flexWrap: "wrap" }}>
+            <a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); scrollTo("contact"); }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 12,
+                padding: "15px 28px",
+                border: `1px solid ${catalogueHover ? "transparent" : "#F0E9DA"}`,
+                borderRadius: 2,
+                color: catalogueHover ? "#14100B" : "#F0E9DA",
+                textDecoration: "none",
+                fontSize: 12.5,
+                letterSpacing: ".14em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                transition: "all .3s",
+                background: catalogueHover ? "#F0E9DA" : "transparent",
+              }}
+              onMouseEnter={() => setCatalogueHover(true)}
+              onMouseLeave={() => setCatalogueHover(false)}
+            >
+              Request the catalogue <span style={{ fontSize: 15 }}>→</span>
+            </a>
+            <a
+              href="https://wa.me/919890661550"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#D69A2E",
+                textDecoration: "none",
+                fontSize: 12.5,
+                letterSpacing: ".12em",
+                textTransform: "uppercase",
+                fontWeight: 600,
+                borderBottom: `1px solid ${waHover ? "#D69A2E" : "transparent"}`,
+                paddingBottom: 2,
+                transition: "border-color .25s",
+              }}
+              onMouseEnter={() => setWaHover(true)}
+              onMouseLeave={() => setWaHover(false)}
+            >
+              WhatsApp us
+            </a>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-10 border-t border-spice-gold/20 animate-fade-up animation-delay-400">
-            <div>
-              <p className="font-display text-3xl md:text-4xl font-bold text-spice-gold">25+</p>
-              <p className="text-spice-cream/60 text-sm mt-1">Years Experience</p>
-            </div>
-            <div>
-              <p className="font-display text-3xl md:text-4xl font-bold text-spice-gold">50+</p>
-              <p className="text-spice-cream/60 text-sm mt-1">Countries Served</p>
-            </div>
-            <div>
-              <p className="font-display text-3xl md:text-4xl font-bold text-spice-gold">100%</p>
-              <p className="text-spice-cream/60 text-sm mt-1">Pure Quality</p>
-            </div>
+          <div style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "clamp(24px,3vw,46px)",
+            marginTop: "clamp(44px,5vw,64px)",
+            borderTop: "1px solid rgba(240,233,218,0.14)",
+            paddingTop: 24,
+          }}>
+            {[
+              { num: "25", label: "Years exporting" },
+              { num: "50+", label: "Countries served", gold: true },
+              { num: "100%", label: "Lab-tested lots" },
+            ].map((stat, i) => (
+              <>
+                {i > 0 && <div key={`div-${i}`} style={{ width: 1, alignSelf: "stretch", background: "rgba(240,233,218,0.14)" }} />}
+                <div key={stat.label} style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                  <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: "clamp(34px,4vw,52px)", lineHeight: 1, color: "#F0E9DA" }}>
+                    {stat.gold
+                      ? <>{stat.num.replace("+", "")}<span style={{ color: "#D69A2E" }}>+</span></>
+                      : stat.num}
+                  </span>
+                  <span style={{ fontSize: 11, letterSpacing: ".2em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>
+                    {stat.label}
+                  </span>
+                </div>
+              </>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <span className="text-spice-cream/40 text-xs tracking-widest uppercase">Scroll</span>
-        <div className="w-6 h-10 rounded-full border-2 border-spice-cream/30 flex justify-center p-2">
-          <div className="w-1 h-2 bg-spice-gold rounded-full animate-pulse" />
+        {/* Right: image */}
+        <div style={{ position: "relative", overflow: "hidden", minHeight: "clamp(360px,52vh,860px)" }}>
+          <img
+            src={heroImage}
+            alt="Indian spices"
+            className="rb-kb"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+          <div aria-hidden="true" style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(90deg, #14100B 0%, transparent 30%), linear-gradient(0deg, rgba(20,16,11,.55), transparent 46%)",
+          }} />
+          <div style={{ position: "absolute", left: 30, bottom: 26, display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#D69A2E" }} />
+            <span style={{ fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "#F0E9DA", fontWeight: 600 }}>
+              Single-origin · Milled to order
+            </span>
+          </div>
         </div>
       </div>
     </section>

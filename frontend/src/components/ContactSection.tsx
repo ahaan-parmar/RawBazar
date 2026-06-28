@@ -1,234 +1,234 @@
 import { useState } from "react";
-import { Send, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { api } from "@/lib/api";
 
-const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+interface FormState {
+  company: string;
+  contact: string;
+  email: string;
+  phone: string;
+  country: string;
+  product: string;
+  quantity: string;
+  details: string;
+}
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+const inputStyle: React.CSSProperties = {
+  background: "transparent",
+  border: "none",
+  borderBottom: "1px solid rgba(240,233,218,0.14)",
+  padding: "8px 0",
+  color: "#F0E9DA",
+  fontFamily: "'Epilogue', sans-serif",
+  fontSize: 15,
+  outline: "none",
+  transition: "border-color .25s",
+  width: "100%",
+};
+
+const labelStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 9,
+};
+
+const labelTextStyle: React.CSSProperties = {
+  fontSize: 10.5,
+  letterSpacing: ".2em",
+  textTransform: "uppercase",
+  color: "#A2917A",
+  fontWeight: 600,
+};
+
+const ContactInput = ({
+  label, type = "text", placeholder, required, value, onChange,
+}: {
+  label: string; type?: string; placeholder?: string;
+  required?: boolean; value: string; onChange: (v: string) => void;
+}) => {
+  const [focused, setFocused] = useState(false);
+  return (
+    <label style={labelStyle}>
+      <span style={labelTextStyle}>{label}{required ? " *" : ""}</span>
+      <input
+        required={required}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        style={{ ...inputStyle, borderBottomColor: focused ? "#D69A2E" : "rgba(240,233,218,0.14)" }}
+      />
+    </label>
+  );
+};
+
+const ContactSection = () => {
+  const [form, setForm] = useState<FormState>({
+    company: "", contact: "", email: "", phone: "",
+    country: "", product: "", quantity: "", details: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [detailsFocused, setDetailsFocused] = useState(false);
+  const [btnHover, setBtnHover] = useState(false);
+  const [waHover, setWaHover] = useState(false);
+
+  const set = (key: keyof FormState) => (v: string) => setForm((f) => ({ ...f, [key]: v }));
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = {
-      company_name: formData.get('company_name') as string,
-      contact_person: formData.get('contact_person') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string,
-      country: formData.get('country') as string,
-      product_required: formData.get('product_required') as string || undefined,
-      quantity: formData.get('quantity') as string,
-      additional_details: formData.get('additional_details') as string || undefined,
-    };
-    
+    setLoading(true);
     try {
-      await api.submitInquiry(data);
-      
-      toast({
-        title: "Inquiry Submitted!",
-        description: "Thank you for your interest. We'll get back to you within 24 hours.",
+      await api.submitInquiry({
+        company_name: form.company,
+        contact_person: form.contact,
+        email: form.email,
+        phone: form.phone,
+        country: form.country,
+        product_required: form.product,
+        quantity: form.quantity,
+        additional_details: form.details,
       });
-      
-      (e.target as HTMLFormElement).reset();
-    } catch (error) {
-      toast({
-        title: "Submission Failed",
-        description: error instanceof Error ? error.message : "Please try again later.",
-      });
+      setSubmitted(true);
+    } catch {
+      alert("Something went wrong — please email us directly at rawbazarofficial@gmail.com");
     } finally {
-      setIsSubmitting(false);
+      setLoading(false);
     }
   };
 
   return (
-    <section className="py-20 md:py-32 bg-secondary">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Contact Info */}
-          <div>
-            <span className="inline-block text-spice-gold text-sm font-body tracking-widest uppercase mb-4">
-              Get In Touch
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Ready to Partner?
-            </h2>
-            <p className="font-body text-muted-foreground text-lg mb-10">
-              Whether you're looking for bulk spice exports, custom packaging, 
-              or have specific requirements, our team is ready to assist you.
-            </p>
+    <section id="contact" style={{ borderTop: "1px solid rgba(240,233,218,0.14)", background: "#1C1610" }}>
+      <div style={{
+        maxWidth: 1320, margin: "0 auto",
+        padding: "clamp(64px,9vw,130px) 32px",
+        display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
+        gap: "clamp(40px,5vw,84px)",
+      }}>
+        {/* Left: contact info */}
+        <div className="rb-rise" style={{ position: "relative" }}>
+          <span aria-hidden="true" style={{
+            position: "absolute", top: -32, left: -8,
+            fontFamily: "'Instrument Serif', serif", fontSize: "clamp(100px,18vw,200px)",
+            lineHeight: 1, color: "rgba(240,233,218,0.04)",
+            letterSpacing: "-0.05em", userSelect: "none", pointerEvents: "none",
+          }}>04</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 13, marginBottom: 22, position: "relative" }}>
+            <span style={{ fontSize: 11, letterSpacing: ".28em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>04 — Inquiries</span>
+          </div>
+          <h2 style={{
+            fontFamily: "'Instrument Serif', serif", fontWeight: 500,
+            fontSize: "clamp(36px,4.8vw,68px)", lineHeight: 1.0,
+            letterSpacing: "-.012em", margin: 0, color: "#F0E9DA",
+          }}>
+            Let's talk shipments.
+          </h2>
+          <p style={{ color: "#A2917A", fontSize: "clamp(15px,1.15vw,17px)", lineHeight: 1.62, margin: "24px 0 36px", maxWidth: "42ch" }}>
+            Bulk exports, custom packing or private label — tell us what you need and we'll reply within 24 hours.
+          </p>
 
-            <div className="space-y-6 mb-10">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-spice-gold/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-spice-gold" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Visit Us</h4>
-                  <p className="text-muted-foreground">
-                    FLAT NO 401 MOHIRA RESIDENCY,<br />
-                    SR NO 5A/A/1A/7/1,<br />
-                    KARVENAGAR, KOTHRUD, PUNE,<br />
-                    PUNE, MAHARASHTRA, 411052
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-spice-gold/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-spice-gold" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Call Us</h4>
-                  <p className="text-muted-foreground">+91 98906 61550</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-spice-gold/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-spice-gold" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">Email Us</h4>
-                  <p className="text-muted-foreground">rawbazarofficial@gmail.com</p>
-                </div>
-              </div>
+          <div style={{ borderTop: "1px solid rgba(240,233,218,0.14)" }}>
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16, padding: "18px 0", borderBottom: "1px solid rgba(240,233,218,0.14)" }}>
+              <span style={{ fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>Visit</span>
+              <span style={{ textAlign: "right", fontSize: 14, color: "#F0E9DA", lineHeight: 1.5, maxWidth: "34ch" }}>
+                Karvenagar, Pune-52,<br />Maharashtra, India
+              </span>
             </div>
-
-            <Button variant="whatsapp" size="lg" asChild>
-              <a href="https://wa.me/919890661550" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-5 h-5" />
-                Chat on WhatsApp
-              </a>
-            </Button>
+            <a href="tel:+917517692934" style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16, padding: "18px 0", borderBottom: "1px solid rgba(240,233,218,0.14)", textDecoration: "none" }}>
+              <span style={{ fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>Call</span>
+              <span style={{ fontSize: 14, color: "#F0E9DA" }}>+91 75176 92934</span>
+            </a>
+            <a href="mailto:rawbazarofficial@gmail.com" style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16, padding: "18px 0", borderBottom: "1px solid rgba(240,233,218,0.14)", textDecoration: "none" }}>
+              <span style={{ fontSize: 11, letterSpacing: ".22em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>Email</span>
+              <span style={{ fontSize: 14, color: "#F0E9DA" }}>rawbazarofficial@gmail.com</span>
+            </a>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-card rounded-2xl p-8 md:p-10 shadow-deep border border-border">
-            <h3 className="font-display text-2xl font-semibold text-foreground mb-6">
-              Export Inquiry Form
-            </h3>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Company Name *
-                  </label>
-                  <Input
-                    name="company_name"
-                    required
-                    placeholder="Your company name"
-                    className="bg-background border-border focus:border-spice-gold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Contact Person *
-                  </label>
-                  <Input
-                    name="contact_person"
-                    required
-                    placeholder="Your name"
-                    className="bg-background border-border focus:border-spice-gold"
-                  />
-                </div>
-              </div>
+          <a
+            href="https://wa.me/919890661550"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 10,
+              marginTop: 28, color: "#D69A2E", textDecoration: "none",
+              fontSize: 12.5, letterSpacing: ".12em", textTransform: "uppercase", fontWeight: 600,
+              borderBottom: `1px solid ${waHover ? "#D69A2E" : "transparent"}`,
+              paddingBottom: 2, transition: "border-color .25s",
+            }}
+            onMouseEnter={() => setWaHover(true)}
+            onMouseLeave={() => setWaHover(false)}
+          >
+            Chat on WhatsApp →
+          </a>
+        </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Email *
-                  </label>
-                  <Input
-                    name="email"
-                    required
-                    type="email"
-                    placeholder="email@company.com"
-                    className="bg-background border-border focus:border-spice-gold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Phone *
-                  </label>
-                  <Input
-                    name="phone"
-                    required
-                    type="tel"
-                    placeholder="+1 234 567 8900"
-                    className="bg-background border-border focus:border-spice-gold"
-                  />
-                </div>
+        {/* Right: form */}
+        <div className="rb-rise" style={{ animationDelay: "120ms" }}>
+          {submitted ? (
+            <div style={{ border: "1px solid rgba(240,233,218,0.14)", padding: "48px 32px", textAlign: "center" }}>
+              <div style={{ fontFamily: "'Instrument Serif', serif", fontStyle: "italic", fontSize: 34, color: "#D69A2E", marginBottom: 12 }}>
+                Inquiry received.
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Country *
-                  </label>
-                  <Input
-                    name="country"
-                    required
-                    placeholder="Your country"
-                    className="bg-background border-border focus:border-spice-gold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    Product Required
-                  </label>
-                  <Input
-                    name="product_required"
-                    placeholder="e.g., Turmeric, Cumin"
-                    className="bg-background border-border focus:border-spice-gold"
-                  />
-                </div>
+              <p style={{ color: "#A2917A", fontSize: 15, margin: 0, lineHeight: 1.6 }}>
+                Thank you — our export team will be in touch within 24 hours.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: 26 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26 }}>
+                <ContactInput label="Company" required value={form.company} onChange={set("company")} />
+                <ContactInput label="Contact name" required value={form.contact} onChange={set("contact")} />
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Quantity (kg) *
-                </label>
-                <Input
-                  name="quantity"
-                  required
-                  placeholder="e.g., 500kg, 1 ton"
-                  className="bg-background border-border focus:border-spice-gold"
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26 }}>
+                <ContactInput label="Email" type="email" required value={form.email} onChange={set("email")} />
+                <ContactInput label="Phone" type="tel" required placeholder="+91 …" value={form.phone} onChange={set("phone")} />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26 }}>
+                <ContactInput label="Country" required value={form.country} onChange={set("country")} />
+                <ContactInput label="Product" placeholder="e.g. Turmeric" value={form.product} onChange={set("product")} />
+              </div>
+              <ContactInput label="Quantity" required placeholder="e.g. 500 kg / month" value={form.quantity} onChange={set("quantity")} />
+              <label style={labelStyle}>
+                <span style={labelTextStyle}>Details</span>
+                <textarea
+                  rows={2}
+                  value={form.details}
+                  onChange={(e) => set("details")(e.target.value)}
+                  onFocus={() => setDetailsFocused(true)}
+                  onBlur={() => setDetailsFocused(false)}
+                  style={{
+                    ...inputStyle,
+                    resize: "none",
+                    borderBottomColor: detailsFocused ? "#D69A2E" : "rgba(240,233,218,0.14)",
+                  }}
                 />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Additional Details
-                </label>
-                <Textarea
-                  name="additional_details"
-                  placeholder="Tell us more about your requirements..."
-                  rows={4}
-                  className="bg-background border-border focus:border-spice-gold resize-none"
-                />
-              </div>
-
-              <Button type="submit" variant="hero" size="xl" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-spice-brown border-t-transparent rounded-full animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    Submit Inquiry
-                  </>
-                )}
-              </Button>
+              </label>
+              <button
+                type="submit"
+                disabled={loading}
+                style={{
+                  marginTop: 8, alignSelf: "flex-start",
+                  display: "inline-flex", alignItems: "center", gap: 12,
+                  padding: "16px 34px",
+                  border: "1px solid #F0E9DA",
+                  borderRadius: 2,
+                  background: btnHover ? "#F0E9DA" : "transparent",
+                  color: btnHover ? "#14100B" : "#F0E9DA",
+                  fontFamily: "'Epilogue', sans-serif",
+                  fontSize: 12.5, letterSpacing: ".14em",
+                  textTransform: "uppercase", fontWeight: 600,
+                  cursor: loading ? "not-allowed" : "pointer",
+                  transition: "all .3s",
+                  opacity: loading ? 0.6 : 1,
+                }}
+                onMouseEnter={() => setBtnHover(true)}
+                onMouseLeave={() => setBtnHover(false)}
+              >
+                {loading ? "Sending…" : <>Submit inquiry <span style={{ fontSize: 15 }}>→</span></>}
+              </button>
             </form>
-          </div>
+          )}
         </div>
       </div>
     </section>

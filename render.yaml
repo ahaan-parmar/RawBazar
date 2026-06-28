@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rawbazar-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_URL
+        value: https://rawbazar.com
+      - key: DATABASE_URL
+        sync: false

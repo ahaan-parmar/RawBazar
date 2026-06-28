@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS inquiries (
 CREATE TABLE IF NOT EXISTS products (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
+  hindi_name VARCHAR(100),
   description TEXT,
   image_url VARCHAR(500),
   category VARCHAR(100),
@@ -29,6 +30,12 @@ CREATE TABLE IF NOT EXISTS products (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Add hindi_name to existing tables (safe to run multiple times)
+ALTER TABLE products ADD COLUMN IF NOT EXISTS hindi_name VARCHAR(100);
+
+-- Unique constraint so seed is idempotent
+ALTER TABLE products ADD CONSTRAINT IF NOT EXISTS products_name_unique UNIQUE (name);
 
 -- Create index on inquiries email for faster lookups
 CREATE INDEX IF NOT EXISTS idx_inquiries_email ON inquiries(email);

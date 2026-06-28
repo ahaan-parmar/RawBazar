@@ -1,96 +1,93 @@
-import { Shield, Award, Leaf, FileCheck, Microscope, BadgeCheck } from "lucide-react";
+import fssaiLogo from "@/assets/fssai.webp";
 
-const certifications = [
-  {
-    icon: Shield,
-    name: "FSSAI Certified",
-    description: "Food Safety and Standards Authority of India",
-  },
-  {
-    icon: Award,
-    name: "ISO 22000:2018",
-    description: "Food Safety Management System",
-  },
-  {
-    icon: Leaf,
-    name: "Organic Certified",
-    description: "USDA & EU Organic Standards",
-  },
-  {
-    icon: FileCheck,
-    name: "APEDA Registered",
-    description: "Agricultural Export Council of India",
-  },
-  {
-    icon: Microscope,
-    name: "Lab Tested",
-    description: "Pesticide & Heavy Metal Free",
-  },
-  {
-    icon: BadgeCheck,
-    name: "HACCP Certified",
-    description: "Hazard Analysis Critical Control",
-  },
+const certs = [
+  { name: "FSSAI Certified",     desc: "License No. 1152699000163" },
+  { name: "ISO 22000:2018",      desc: "Food Safety Management System" },
+  { name: "Organic Certified",   desc: "USDA & EU organic standards" },
+  { name: "APEDA Registered",    desc: "Agricultural & Processed Food Export Council" },
+  { name: "Lab Tested",          desc: "Pesticide & heavy-metal screened — every batch" },
+  { name: "HACCP Certified",     desc: "Hazard Analysis Critical Control Point" },
 ];
 
-const QualitySection = () => {
-  return (
-    <section className="py-20 md:py-32 bg-spice-brown relative overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-spice-gold rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-spice-saffron rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block text-spice-gold text-sm font-body tracking-widest uppercase mb-4">
-            Quality Assurance
-          </span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-spice-cream mb-6">
-            Certified Excellence
-          </h2>
-          <p className="font-body text-spice-cream/70 max-w-2xl mx-auto text-lg">
-            Every batch of our spices undergoes rigorous testing and quality 
-            checks. We maintain the highest international standards to ensure 
-            you receive only the purest, safest products.
-          </p>
+const QualitySection = () => (
+  <section id="quality" style={{ maxWidth: 1320, margin: "0 auto", padding: "clamp(64px,9vw,140px) 32px" }}>
+    <div style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+      gap: "clamp(40px,5vw,90px)",
+    }}>
+      {/* Left */}
+      <div className="rb-rise" style={{ position: "relative" }}>
+        <span aria-hidden="true" style={{
+          position: "absolute", top: -32, left: -8,
+          fontFamily: "'Instrument Serif', serif", fontSize: "clamp(100px,18vw,200px)",
+          lineHeight: 1, color: "rgba(240,233,218,0.04)",
+          letterSpacing: "-0.05em", userSelect: "none", pointerEvents: "none",
+        }}>03</span>
+        <div style={{ display: "flex", alignItems: "center", gap: 13, marginBottom: 22, position: "relative" }}>
+          <span style={{ fontSize: 11, letterSpacing: ".28em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>03 — Assurance</span>
         </div>
+        <h2 style={{
+          fontFamily: "'Instrument Serif', serif", fontWeight: 500,
+          fontSize: "clamp(34px,4.4vw,62px)", lineHeight: 1.02,
+          letterSpacing: "-.01em", margin: 0, color: "#F0E9DA",
+        }}>
+          Certified to the core.
+        </h2>
+        <p style={{ color: "#A2917A", fontSize: "clamp(15px,1.15vw,17px)", lineHeight: 1.62, margin: "24px 0 36px", maxWidth: "46ch" }}>
+          Every batch is screened for pesticides and heavy metals, then packed to international food-safety standards — with documentation to match.
+        </p>
 
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {certifications.map((cert) => (
-            <div
-              key={cert.name}
-              className="group bg-spice-cream/5 backdrop-blur-sm border border-spice-gold/20 rounded-xl p-6 text-center hover:bg-spice-gold/10 hover:border-spice-gold/40 transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-gradient-to-br from-spice-gold to-spice-saffron flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <cert.icon className="w-7 h-7 text-spice-brown" />
-              </div>
-              <h4 className="font-display text-sm font-semibold text-spice-cream mb-2">
-                {cert.name}
-              </h4>
-              <p className="text-spice-cream/60 text-xs leading-relaxed">
-                {cert.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Quality Promise */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-4 px-8 py-4 bg-spice-gold/10 border border-spice-gold/30 rounded-full">
-            <div className="w-3 h-3 bg-spice-gold rounded-full animate-pulse" />
-            <span className="text-spice-gold font-display text-lg font-semibold">
-              100% Quality Guarantee on Every Shipment
+        {/* FSSAI block */}
+        <div style={{ display: "flex", alignItems: "center", gap: 18, padding: "20px 22px", border: "1px solid rgba(240,233,218,0.14)", marginBottom: 24 }}>
+          <img
+            src={fssaiLogo}
+            alt="FSSAI"
+            style={{ width: 58, height: 58, objectFit: "contain", background: "#F0E9DA", padding: 6, borderRadius: 6, flexShrink: 0 }}
+          />
+          <div>
+            <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: "italic", fontSize: "clamp(17px,1.6vw,22px)", lineHeight: 1.3, color: "#F0E9DA", display: "block" }}>
+              A 100% quality guarantee on every shipment we send.
             </span>
-            <div className="w-3 h-3 bg-spice-gold rounded-full animate-pulse" />
+            <span style={{ fontSize: 11, letterSpacing: ".1em", color: "#A2917A", marginTop: 6, display: "block" }}>
+              JRHP Export House Private Limited
+            </span>
           </div>
         </div>
+
+        {/* Packaging note */}
+        <div style={{
+          padding: "16px 20px",
+          border: "1px solid rgba(240,233,218,0.14)",
+          display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12,
+        }}>
+          <span style={{ fontSize: 11, letterSpacing: ".2em", textTransform: "uppercase", color: "#A2917A", fontWeight: 600 }}>
+            Pack sizes
+          </span>
+          <span style={{ fontFamily: "'Instrument Serif', serif", fontSize: 18, color: "#F0E9DA" }}>
+            50 g · 250 g · 500 g · 1 kg
+          </span>
+        </div>
       </div>
-    </section>
-  );
-};
+
+      {/* Right: certs list */}
+      <div className="rb-rise" style={{ borderTop: "1px solid rgba(240,233,218,0.14)", animationDelay: "120ms" }}>
+        {certs.map((c) => (
+          <div key={c.name} style={{
+            display: "flex", alignItems: "baseline", justifyContent: "space-between",
+            gap: 20, padding: "22px 0", borderBottom: "1px solid rgba(240,233,218,0.14)",
+          }}>
+            <span style={{ fontFamily: "'Instrument Serif', serif", fontWeight: 500, fontSize: "clamp(20px,2vw,26px)", letterSpacing: "-.005em", color: "#F0E9DA" }}>
+              {c.name}
+            </span>
+            <span style={{ textAlign: "right", fontSize: 12.5, color: "#A2917A", lineHeight: 1.45, maxWidth: "26ch" }}>
+              {c.desc}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 export default QualitySection;
