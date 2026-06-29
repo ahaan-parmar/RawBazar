@@ -1,35 +1,75 @@
-// VITE_API_URL = full backend origin, e.g. https://rawbazar-backend.onrender.com
-// Defaults to empty string so relative /api/* hits Vite's dev-proxy
 const ORIGIN = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
-
 const base = `${ORIGIN}/api`;
 
 export const api = {
+  // ── Public ────────────────────────────────────────────────────────────────
   submitInquiry: async (data: {
-    company_name: string;
-    contact_person: string;
-    email: string;
-    phone: string;
-    country: string;
-    product_required?: string;
-    quantity: string;
-    additional_details?: string;
+    company_name: string; contact_person: string; email: string; phone: string;
+    country: string; product_required?: string; quantity: string; additional_details?: string;
   }) => {
-    const response = await fetch(`${base}/inquiries`, {
+    const r = await fetch(`${base}/inquiries`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      throw new Error((error as { message?: string }).message || "Failed to submit inquiry");
-    }
-    return response.json();
+    if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error((e as { message?: string }).message || "Failed"); }
+    return r.json();
   },
 
   getProducts: async () => {
-    const response = await fetch(`${base}/products`);
-    if (!response.ok) throw new Error("Failed to fetch products");
-    return response.json();
+    const r = await fetch(`${base}/products`);
+    if (!r.ok) throw new Error("Failed to fetch products");
+    return r.json();
+  },
+
+  // ── Admin: Inquiries ──────────────────────────────────────────────────────
+  getInquiries: async (status?: string) => {
+    const url = status ? `${base}/inquiries?status=${status}` : `${base}/inquiries`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error("Failed to fetch inquiries");
+    return r.json();
+  },
+
+  updateInquiryStatus: async (id: number, status: string) => {
+    const r = await fetch(`${base}/inquiries/${id}/status`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status }),
+    });
+    if (!r.ok) throw new Error("Failed to update status");
+    return r.json();
+  },
+
+  // ── Admin: Products ───────────────────────────────────────────────────────
+  getAllProducts: async () => {
+    const r = await fetch(`${base}/products?is_active=all`);
+    if (!r.ok) throw new Error("Failed to fetch products");
+    return r.json();
+  },
+
+  createProduct: async (data: Record<string, unknown>) => {
+    const r = await fetch(`${base}/products`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!r.ok) throw new Error("Failed to create product");
+    return r.json();
+  },
+
+  updateProduct: async (id: number, data: Record<string, unknown>) => {
+    const r = await fetch(`${base}/products/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!r.ok) throw new Error("Failed to update product");
+    return r.json();
+  },
+
+  deleteProduct: async (id: number) => {
+    const r = await fetch(`${base}/products/${id}`, { method: "DELETE" });
+    if (!r.ok) throw new Error("Failed to delete product");
+    return r.json();
   },
 };

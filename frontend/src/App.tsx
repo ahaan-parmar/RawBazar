@@ -11,6 +11,7 @@ import Quality from "./pages/Quality";
 import Global from "./pages/Global";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AdminPanel from "./pages/AdminPanel";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/quality" element={<Quality />} />
             <Route path="/global" element={<Global />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/rb-ops-9f2" element={<AdminPanel />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
