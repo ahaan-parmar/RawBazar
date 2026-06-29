@@ -35,7 +35,10 @@ CREATE TABLE IF NOT EXISTS products (
 ALTER TABLE products ADD COLUMN IF NOT EXISTS hindi_name VARCHAR(100);
 
 -- Unique constraint so seed is idempotent
-ALTER TABLE products ADD CONSTRAINT IF NOT EXISTS products_name_unique UNIQUE (name);
+DO $$ BEGIN
+  ALTER TABLE products ADD CONSTRAINT products_name_unique UNIQUE (name);
+EXCEPTION WHEN duplicate_table THEN NULL;
+END $$;
 
 -- Create index on inquiries email for faster lookups
 CREATE INDEX IF NOT EXISTS idx_inquiries_email ON inquiries(email);
