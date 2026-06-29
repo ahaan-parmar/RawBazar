@@ -4,17 +4,19 @@ import { products as SEED_DATA } from '../products-data.js';
 
 const router = express.Router();
 
-// POST /api/products/seed — inserts all default products (ON CONFLICT DO NOTHING)
+// POST /api/products/seed — inserts all default products, skips existing names
 router.post('/seed', async (req, res) => {
   try {
     let inserted = 0, skipped = 0;
     for (const p of SEED_DATA) {
-      const r = await query(
+      const exists = await query('SELECT id FROM products WHERE name = $1', [p.name]);
+      if (exists.rows.length > 0) { skipped++; continue; }
+      await query(
         `INSERT INTO products (name, hindi_name, category, grade, image_url, origin, is_active)
-         VALUES ($1,$2,$3,$4,$5,$6,true) ON CONFLICT (name) DO NOTHING`,
+         VALUES ($1,$2,$3,$4,$5,$6,true)`,
         [p.name, p.hindi_name || null, p.category, p.grade, p.image_url || null, p.origin]
       );
-      if (r.rowCount > 0) inserted++; else skipped++;
+      inserted++;
     }
     res.json({ success: true, message: `${inserted} inserted, ${skipped} already existed` });
   } catch (error) {

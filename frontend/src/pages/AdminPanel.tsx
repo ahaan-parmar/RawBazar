@@ -272,7 +272,7 @@ const ProductsTab = () => {
               if (!confirm("Load all 43 default products? Existing ones won't be overwritten.")) return;
               setSeeding(true);
               try { const r = await api.seedProducts(); alert(r.message); load(); }
-              catch { alert("Seed failed"); }
+              catch (e) { alert("Seed failed: " + (e instanceof Error ? e.message : String(e))); }
               finally { setSeeding(false); }
             }}
             disabled={seeding}
