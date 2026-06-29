@@ -185,6 +185,27 @@ const InquiriesTab = () => {
 
 const EMPTY_PRODUCT = { name: "", hindi_name: "", category: "", grade: "", origin: "", image_url: "", is_active: true };
 
+const ImageUpload = ({ url, onUrl }: { url: string; onUrl: (u: string) => void }) => {
+  const [uploading, setUploading] = useState(false);
+  const pick = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try { onUrl(await api.uploadImage(file)); }
+    catch { alert("Image upload failed"); }
+    finally { setUploading(false); e.target.value = ""; }
+  };
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      {url && <img src={url} alt="" style={{ width: 36, height: 36, objectFit: "cover", borderRadius: 2, border: "1px solid rgba(240,233,218,0.14)" }} />}
+      <label style={{ ...s.btn(), cursor: "pointer", fontSize: 11, whiteSpace: "nowrap" as const }}>
+        {uploading ? "Uploading…" : url ? "Change" : "Upload image"}
+        <input type="file" accept="image/*" style={{ display: "none" }} onChange={pick} disabled={uploading} />
+      </label>
+    </div>
+  );
+};
+
 const ProductsTab = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -239,6 +260,9 @@ const ProductsTab = () => {
 
   const EditRow = ({ buf, set }: { buf: Record<string, unknown>; set: (k: string, v: unknown) => void }) => (
     <tr style={{ background: "rgba(214,154,46,0.06)" }}>
+      <td style={s.td}>
+        <ImageUpload url={buf.image_url as string} onUrl={u => set("image_url", u)} />
+      </td>
       <td style={s.td}><input style={s.input} value={buf.name as string} onChange={e => set("name", e.target.value)} placeholder="Name *" /></td>
       <td style={s.td}><input style={s.input} value={buf.hindi_name as string} onChange={e => set("hindi_name", e.target.value)} placeholder="Hindi name" /></td>
       <td style={s.td}>
@@ -288,7 +312,7 @@ const ProductsTab = () => {
         <table style={s.table}>
           <thead>
             <tr>
-              {["Name", "Hindi", "Category", "Grade", "Origin", "Status", "Actions"].map(h => (
+              {["Image", "Name", "Hindi", "Category", "Grade", "Origin", "Status", "Actions"].map(h => (
                 <th key={h} style={s.th}>{h}</th>
               ))}
             </tr>
@@ -298,7 +322,7 @@ const ProductsTab = () => {
               <>
                 <EditRow buf={newBuf as unknown as Record<string, unknown>} set={(k, v) => setNewBuf(b => ({ ...b, [k]: v }))} />
                 <tr>
-                  <td colSpan={7} style={{ ...s.td, paddingTop: 4 }}>
+                  <td colSpan={8} style={{ ...s.td, paddingTop: 4 }}>
                     <div style={{ display: "flex", gap: 8 }}>
                       <button onClick={saveNew} disabled={saving} style={s.btn(true)}>{saving ? "Saving…" : "Save"}</button>
                       <button onClick={() => setAdding(false)} style={s.btn()}>Cancel</button>
@@ -311,7 +335,7 @@ const ProductsTab = () => {
               <>
                 <EditRow key={`${p.id}-edit`} buf={editBuf} set={(k, v) => setEditBuf(b => ({ ...b, [k]: v }))} />
                 <tr key={`${p.id}-save`}>
-                  <td colSpan={7} style={{ ...s.td, paddingTop: 4 }}>
+                  <td colSpan={8} style={{ ...s.td, paddingTop: 4 }}>
                     <div style={{ display: "flex", gap: 8 }}>
                       <button onClick={saveEdit} disabled={saving} style={s.btn(true)}>{saving ? "Saving…" : "Save"}</button>
                       <button onClick={() => setEditing(null)} style={s.btn()}>Cancel</button>
@@ -321,6 +345,13 @@ const ProductsTab = () => {
               </>
             ) : (
               <tr key={p.id} style={{ opacity: p.is_active ? 1 : 0.45 }}>
+                <td style={s.td}>
+                  {p.image_url?.startsWith("http") ? (
+                    <img src={p.image_url} alt="" style={{ width: 36, height: 36, objectFit: "cover", borderRadius: 2, border: "1px solid rgba(240,233,218,0.14)" }} />
+                  ) : (
+                    <div style={{ width: 36, height: 36, background: "rgba(240,233,218,0.05)", borderRadius: 2, border: "1px solid rgba(240,233,218,0.08)" }} />
+                  )}
+                </td>
                 <td style={{ ...s.td, fontWeight: 500 }}>{p.name}</td>
                 <td style={{ ...s.td, color: "#A2917A", fontStyle: "italic" }}>{p.hindi_name ?? "—"}</td>
                 <td style={{ ...s.td, color: "#A2917A" }}>{p.category ?? "—"}</td>

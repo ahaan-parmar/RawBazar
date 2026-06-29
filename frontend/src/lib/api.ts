@@ -78,4 +78,13 @@ export const api = {
     if (!r.ok) throw new Error("Seed failed");
     return r.json();
   },
+
+  uploadImage: async (file: File): Promise<string> => {
+    const form = new FormData();
+    form.append("file", file);
+    const r = await fetch(`${base}/upload`, { method: "POST", body: form });
+    if (!r.ok) throw new Error("Upload failed");
+    const data = await r.json();
+    return data.url as string;
+  },
 };

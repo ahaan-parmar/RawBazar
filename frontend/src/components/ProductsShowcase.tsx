@@ -55,8 +55,11 @@ const ProductsShowcase = () => {
     if (previewRef.current)
       previewRef.current.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
   };
+  const resolveImg = (imgFile: string | null) =>
+    imgFile ? (imgFile.startsWith("http") ? imgFile : IMAGE_MAP[imgFile] ?? null) : null;
+
   const onRowEnter = (imgFile: string | null, idx: number) => {
-    const img = imgFile ? IMAGE_MAP[imgFile] : null;
+    const img = resolveImg(imgFile);
     if (!img) return;
     setHoveredIdx(idx);
     if (previewImgRef.current) previewImgRef.current.src = img;
@@ -76,8 +79,8 @@ const ProductsShowcase = () => {
     return acc;
   }, {});
 
-  // Featured = products that have an image
-  const featured = products.filter((p) => p.image_url && IMAGE_MAP[p.image_url]);
+  // Featured = products that have a resolvable image
+  const featured = products.filter((p) => resolveImg(p.image_url));
 
   return (
     <section

@@ -5,6 +5,7 @@ import { testConnection, query } from './db.js';
 import initDatabase from './init-db.js';
 import inquiriesRouter from './routes/inquiries.js';
 import productsRouter from './routes/products.js';
+import uploadRouter from './routes/upload.js';
 
 dotenv.config();
 
@@ -96,6 +97,7 @@ app.get('/api/tables', async (req, res) => {
 // API Routes
 app.use('/api/inquiries', inquiriesRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/upload', uploadRouter);
 
 // Start server
 app.listen(PORT, async () => {
