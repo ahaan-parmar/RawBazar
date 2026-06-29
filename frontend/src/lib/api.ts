@@ -72,4 +72,10 @@ export const api = {
     if (!r.ok) throw new Error("Failed to delete product");
     return r.json();
   },
+
+  seedProducts: async () => {
+    const r = await fetch(`${base}/products/seed`, { method: "POST" });
+    if (!r.ok) throw new Error("Seed failed");
+    return r.json();
+  },
 };

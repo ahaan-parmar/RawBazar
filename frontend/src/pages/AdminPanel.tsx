@@ -194,6 +194,7 @@ const ProductsTab = () => {
   const [newBuf, setNewBuf] = useState({ ...EMPTY_PRODUCT });
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState<number | null>(null);
+  const [seeding, setSeeding] = useState(false);
 
   const load = useCallback(() => {
     setLoading(true);
@@ -266,6 +267,19 @@ const ProductsTab = () => {
         <span style={{ fontSize: 11, color: "#A2917A", letterSpacing: ".1em" }}>{products.length} products</span>
         <div style={{ display: "flex", gap: 10 }}>
           <button onClick={load} style={s.btn()}>↻ Refresh</button>
+          <button
+            onClick={async () => {
+              if (!confirm("Load all 43 default products? Existing ones won't be overwritten.")) return;
+              setSeeding(true);
+              try { const r = await api.seedProducts(); alert(r.message); load(); }
+              catch { alert("Seed failed"); }
+              finally { setSeeding(false); }
+            }}
+            disabled={seeding}
+            style={s.btn()}
+          >
+            {seeding ? "Seeding…" : "⬇ Load catalogue"}
+          </button>
           <button onClick={() => { setAdding(true); setEditing(null); }} style={s.btn(true)}>+ Add product</button>
         </div>
       </div>
